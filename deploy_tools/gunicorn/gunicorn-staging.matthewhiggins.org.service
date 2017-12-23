@@ -1,0 +1,13 @@
+[Unit]
+Description=Gunicorn server for list app on staging.matthewhiggins.org
+
+[Service]
+Restart=on-failure
+User=vextor
+WorkingDirectory=/home/vextor/sites/staging.matthewhiggins.org
+ExecStart=/home/vextor/sites/staging.matthewhiggins.org/virtualenv/bin/gunicorn \
+	--bind unix:/var/sockets/staging.matthewhiggins.org.socket \
+	superlists.wsgi:application
+
+[Install]
+WantedBy=multi-user.target
